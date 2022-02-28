@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { Box, Paper, Grid, Button, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
 
 import axios from "axios"
 
 const Todolist = props => {
+  console.log(props)
   const deleteTodo = () => {
     axios
       .get(`http://localhost:5000/deleteTodos/${props.id}`)
@@ -36,7 +37,13 @@ const Todolist = props => {
             <Typography variant='body1'>{props.description}</Typography>
           </Grid>
           <Grid item xs={12} sm={2}>
-            <Link to={`/update/${props.id}`} state={props}>
+            <Link
+              to={`/update/${props.id}`}
+              state={{
+                id: props.id,
+                title: props.title,
+                description: props.description,
+              }}>
               <Button
                 variant='contained'
                 sx={{ marginBottom: "3px", width: "82px" }}
